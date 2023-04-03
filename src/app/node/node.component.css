@@ -6,8 +6,7 @@
 }
 
 .node {
-    width: 100px;
-    height: 50px;
+    padding: 10px;
     border: 1px solid;
     display: flex;
     align-items: center;

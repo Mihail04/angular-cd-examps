@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, NgZone, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Injector, Input, NgZone, TemplateRef} from '@angular/core';
 
 @Component({
   selector: 'app-node-on-push',
@@ -6,15 +6,14 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, NgZone, On
   styleUrls: ['./node-on-push.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NodeOnPushComponent implements OnInit {
+export class NodeOnPushComponent {
 
-  @Input() a: number;
-
-  constructor(private cdr: ChangeDetectorRef,
-    private zone: NgZone){
-  }
-
-  ngOnInit(): void {
+  @Input() template: TemplateRef<void>;
+  
+  constructor(
+    public cdr: ChangeDetectorRef,
+    private zone: NgZone,
+    public injector: Injector){
   }
 
   cd(elm: HTMLElement): void {
@@ -22,13 +21,11 @@ export class NodeOnPushComponent implements OnInit {
     this.zone.runOutsideAngular(() => {
       setTimeout(() => {
         elm.classList.remove('hightlight');
-    }, 500);
+      }, 500);
     })
   }
 
-  clickOnNode(): void {
-    this.cdr.detectChanges();
+  click() {
+    
   }
-
-
 }

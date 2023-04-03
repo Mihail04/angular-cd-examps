@@ -1,4 +1,5 @@
-import {ChangeDetectorRef, Component, Input, NgZone, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, Injector, NgZone, OnInit, Optional} from '@angular/core';
+import {NodeOnPushComponent} from '../node-on-push/node-on-push.component';
 
 @Component({
   selector: 'app-node',
@@ -7,14 +8,17 @@ import {ChangeDetectorRef, Component, Input, NgZone, OnInit} from '@angular/core
 })
 export class NodeComponent implements OnInit {
 
-  text;
-
-  @Input() b: number;
-
-  constructor(private cdr: ChangeDetectorRef,
-    private zone: NgZone){
+  constructor(
+      private cdr: ChangeDetectorRef,
+      private zone: NgZone,
+      @Optional()@Inject(NodeOnPushComponent) private NodeOnPushComponent: NodeOnPushComponent,
+      private injector: Injector
+    ){
   }
+
   ngOnInit(): void {
+    console.log(NodeOnPushComponent)
+    console.log(this.injector)
   }
 
   cd(elm: HTMLElement): void {
@@ -25,12 +29,5 @@ export class NodeComponent implements OnInit {
     }, 500);
     })
   }
-
-  clickOnNode(): void {
-    this.text = Math.random().toFixed(1);
-    this.cdr.detectChanges();
-  }
-
-
 }
 

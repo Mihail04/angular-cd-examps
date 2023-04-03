@@ -1,14 +1,9 @@
 <button (click)="runAppTick()">app-tick</button>
-<button (click)="sendPropsToPush()">send-props-to-OnPush</button>
-<button (click)="sendProps()">send-props</button>
 <button (click)="click()">click()</button>
 
-<app-node>
-  <app-node-on-push [a]="a">
-   
-  </app-node-on-push>
-  <app-node  [b]="b">
+<app-node-on-push [template]="onPushNodeTemplate"></app-node-on-push>
+
+<ng-template #onPushNodeTemplate>
     <app-node></app-node>
     <app-node></app-node>
-  </app-node>
-</app-node>
+</ng-template>
